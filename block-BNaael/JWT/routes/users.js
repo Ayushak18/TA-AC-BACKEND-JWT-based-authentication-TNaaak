@@ -38,8 +38,10 @@ router.post('/login', (req, res, next) => {
           if (user.password === password) {
             let token = await user.signToken();
             req.headers.authorization = token;
+            return res.json({ user, token });
+
             // console.log(req.headers);
-            res.redirect('/users/protected');
+            // res.send('/users/protected');
           } else {
             res.send('Password incorrect');
           }
